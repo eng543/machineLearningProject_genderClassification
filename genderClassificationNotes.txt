@@ -1,0 +1,14 @@
+Predict (non-binary) gender from language use on Twitter
+	-pick our language use feature (or combination of features):
+		*words (unigrams)
+		*combination of words (bigrams)
+		*hashtags
+		*topics (set of unigrams in tweet?)
+		*POS
+		*word class (content vs. function)
+
+	-sample size? (how many users?; how many tweets per user?)
+
+	-creating dataset
+		*identify twitter users who have declared gender identity in bio
+			-what are gender identity “categories” we are targeting?

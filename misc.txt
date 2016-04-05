@@ -1,0 +1,1 @@
+How to collect twitter data: http://knightlab.northwestern.edu/2014/03/15/a-beginners-guide-to-collecting-twitter-data-and-a-bit-of-web-scraping/
