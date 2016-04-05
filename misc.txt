@@ -1,1 +1,5 @@
-How to collect twitter data: http://knightlab.northwestern.edu/2014/03/15/a-beginners-guide-to-collecting-twitter-data-and-a-bit-of-web-scraping/
+Twitter and python:
+
+http://knightlab.northwestern.edu/2014/03/15/a-beginners-guide-to-collecting-twitter-data-and-a-bit-of-web-scraping/
+
+https://data.library.utoronto.ca/scraping-tweets-using-python
