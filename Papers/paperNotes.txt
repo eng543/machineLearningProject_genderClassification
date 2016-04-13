@@ -80,5 +80,3 @@
 	*character-level ngrams
 
 -model: balanced Winnow2 (good combo of accuracy, speed, and robustness to irrelevant features)
-
-
