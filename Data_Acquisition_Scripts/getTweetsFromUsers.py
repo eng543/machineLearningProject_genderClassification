@@ -152,8 +152,7 @@ class ACCOUNT(Base):
     screen_name = Column(String)  
     user_type = Column(String) 
 
-    def __init__(self, screen_name, user_type
-    ):       
+    def __init__(self, screen_name, user_type):
     
         self.screen_name = screen_name
         self.user_type = user_type
