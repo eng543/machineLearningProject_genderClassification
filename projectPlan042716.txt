@@ -1,0 +1,22 @@
+-from giant set (results9, results10, results11):
+	*pull out non-english
+	*pull out duplicates
+	*pull out users who do not have keyword in description
+
+-bot exclusion:
+	*use subset of usernames to get follower information
+	*get tweet count, exclude users who have not tweeted X amount of times
+
+-get tweets
+	*180 requests per 15 minutes
+	*100 tweets per request
+	*only include XXX most recent tweets from each user
+
+	*tweet output
+		-each row = a tweet from a user
+		-columns:
+			*user
+			*tweet
+			*hashtags in tweet
+
+-NLP shit to get features
