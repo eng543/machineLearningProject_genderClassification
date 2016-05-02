@@ -16,6 +16,10 @@ def check_homogenous(data_set):
     '''
     # Your code here
     # if homogeneous, means that the tree is finished
+    outcomes = []
+    for i in range(0, len(data_set)):
+        outcomes.append([data_set[i][0]])
+
     positive_count = 0
     negative_count = 0
 
@@ -98,9 +102,6 @@ def gain_ratio_nominal(data_set, attribute):
 #print gain_ratio_nominal(data_set,attr) #== 0.06409559743967516
 
 
-
-
-
 def mode(data_set):
     '''
     ========================================================================================================
@@ -111,6 +112,9 @@ def mode(data_set):
     Output: mode of index 0.
     ========================================================================================================
     '''
+    outcomes = []
+    for i in range(0, len(data_set)):
+        outcomes.append([data_set[i][0]])
 
     positive_count = 0
     negative_count = 0
@@ -141,12 +145,10 @@ def entropy(data_set):
     Output: Returns entropy. See Textbook for formula
     ========================================================================================================
     '''
-    #### this should get fed a list of lists with the outcome labels for the subset of data relevant for the feature
-
     # commented out code creates this list of lists if the input happens to be the entire data_set
-    #outcomes = []
-    #for i in range(0, len(data_set)):
-    #    outcomes.append([data_set[i][0]])
+    outcomes = []
+    for i in range(0, len(data_set)):
+        outcomes.append([data_set[i][0]])
 
     positive_count = 0
     negative_count = 0
@@ -351,7 +353,7 @@ def split_on_numerical(data_set, attribute, splitting_value):
 # d_set,a,sval = [[1, 0.25], [1, 0.89], [0, 0.93], [0, 0.48], [1, 0.19], [1, 0.49], [0, 0.6], [0, 0.6], [1, 0.34], [1, 0.19]],1,0.48
 # split_on_numerical(d_set,a,sval) == ([[1, 0.25], [1, 0.19], [1, 0.34], [1, 0.19]],[[1, 0.89], [0, 0.93], [0, 0.48], [1, 0.49], [0, 0.6], [0, 0.6]])
 # d_set,a,sval = [[0, 0.91], [0, 0.84], [1, 0.82], [1, 0.07], [0, 0.82],[0, 0.59], [0, 0.87], [0, 0.17], [1, 0.05], [1, 0.76]],1,0.17
-# split_on_numerical(d_set,a,sval) == ([[1, 0.07], [1, 0.05]],[[0, 0.91],[0, 0.84], [1, 0.82], [0, 0.82], [0, 0.59], [0, 0.87], [0, 0.17], [1, 0.76]])
+# split_on_numerical(d_set,a,sval) == ([[1, 0.07], [1, 0.05]],   [[0, 0.91],[0, 0.84], [1, 0.82], [0, 0.82], [0, 0.59], [0, 0.87], [0, 0.17], [1, 0.76]])
 
 def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
     '''
@@ -366,7 +368,6 @@ def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
     Output: best attribute, split value if numeric
     ========================================================================================================
     '''
-
     ratios = {}
 
     for i in range(1, len(data_set[0])):
@@ -396,7 +397,6 @@ def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
 #data_set = [[0, 0], [1, 0], [0, 2], [0, 2], [0, 3], [1, 1], [0, 4], [0, 2], [1, 2], [1, 5]]
 #print pick_best_attribute(data_set, attribute_metadata, numerical_splits_count) == (1, False)
 
-# Uses gain_ratio_nominal or gain_ratio_numeric to calculate gain ratio.
 
 def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
     '''
@@ -414,25 +414,62 @@ def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
     # Your code here
 
     root = Node()
-    best_att = pick_best_attribute(data_set, attribute_metadata, numerical_splits_count)
-    root.decision_attribute = best_att[0]
-    root.is_nominal = attribute_metadata[best_att[0]]['is_nominal']
-    root.splitting_value = best_att[1]
-    outcomes = []
-    for i in range(0, len(data_set)):
-        outcomes.append([data_set[i][0]])
-    done = check_homogenous(outcomes)
-    root.label = done
-    root.name = attribute_metadata[best_att[0]]['name']
+
+    if depth == 0:
+        root.label = mode(data_set)
+
+    else:
+        root.label = check_homogenous(data_set)
+
+    print root.label
+
+    if root.label != None:
+        return root
+
+    else:
+        best_att = pick_best_attribute(data_set, attribute_metadata, numerical_splits_count)
+        root.decision_attribute = best_att[0]
+        root.is_nominal = attribute_metadata[best_att[0]]['is_nominal']
+        root.splitting_value = best_att[1]
+        root.name = attribute_metadata[best_att[0]]['name']
+        child_numerical_splits_count = numerical_splits_count
+
+        print best_att
+
+        if root.is_nominal == True:
+            root.children = {}
+            data = split_on_nominal(data_set, root.decision_attribute)
+            sub_depth = depth - 1
+
+            for i in data.keys():
+                new_node = ID3(data[i], attribute_metadata, child_numerical_splits_count, sub_depth)
+                root.children[i] = new_node
+
+        elif root.is_nominal == False:
+            root.children = []
+            data = split_on_numerical(data_set, root.decision_attribute, root.splitting_value)
+            child_numerical_splits_count[root.decision_attribute] = child_numerical_splits_count[root.decision_attribute] - 1
+            sub_depth = depth - 1
+
+            for i in range(len(data)):
+                new_node = ID3(data[i], attribute_metadata, child_numerical_splits_count, sub_depth)
+                root.children.append(new_node)
+
+    #outcomes = []
+    #for i in range(0, len(data_set)):
+    #    outcomes.append([data_set[i][0]])
+    #done = check_homogenous(outcomes)
+    #root.label = done
+
 
     ### this is not correct
     # root.children should not have subset datasets in values for each attribute thing
-    if root.is_nominal == True:
-        root.children = split_on_nominal(data_set, root.decision_attribute)
-    else:
-        root.children = split_on_numerical(data_set, root.decision_attribute, root.splitting_value)
+    # could just leave it and override later with the new branching nodes
+    #if root.is_nominal == True:
+    #    root.children = split_on_nominal(data_set, root.decision_attribute)
+    #else:
+    #    root.children = split_on_numerical(data_set, root.decision_attribute, root.splitting_value)
 
-    return root.children
 
     #while tree.label == None:
     # GenerateTree(X)
@@ -467,7 +504,7 @@ def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
 
     # somewhere deal with the numerical_splits_count thing
 
-numerical_split_counts = [20, 20]
-attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "weather",'is_nominal': True}]
-data_set = [[0, 0], [1, 0], [0, 2], [0, 2], [0, 3], [1, 1], [0, 4], [0, 2], [1, 2], [1, 5]]
-print ID3(data_set, attribute_metadata, numerical_split_counts, depth = 0)
+numerical_split_counts = [1, 1]
+attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "opprundifferential",'is_nominal': False}]
+data_set = [[1, 0.27], [0, 0.42], [0, 0.86], [0, 0.68], [0, 0.04], [1, 0.01], [1, 0.33], [1, 0.42], [1, 0.42], [0, 0.51], [1, 0.4]]
+print ID3(data_set, attribute_metadata, numerical_split_counts, 0)

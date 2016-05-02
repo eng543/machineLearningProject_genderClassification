@@ -1,5 +1,49 @@
 import csv, collections
 
+def clean_data(fileToRead, attributes):
+    '''
+    deal with missing data
+    called inside parse function
+
+    nominal: impute mode
+    numeric: impute mean
+    '''
+
+    att_values = {}
+
+    for row in fileToRead:
+        temp = row[0].split(',')
+        for i in range(len(temp)): # loop through attributes in an example
+            if i in att_values.keys():
+                if temp[i] == '?': # ignore the missing attribute values
+                    continue
+                else:
+                    att_values[i].append(float(temp[i])) # put the rest of the values in a dictionary with attribute index as key
+            else:
+                if temp[i] == '?':
+                    continue
+                else:
+                    att_values[i] = [float(temp[i])]
+
+    att_means = {} # dictionary to store mean or mode for attribute at each index
+
+    for j in att_values.keys():
+        if attributes[j]['is_nominal']:
+            # use mode of attribute
+            sub_data = collections.Counter(att_values[j])
+            att_means[j] = sub_data.most_common(1)[0][0]
+
+        if not attributes[j]['is_nominal']:
+            # use mean of attribute
+            att_means[j] = sum(att_values[j])/float(len(att_values[j]))
+
+    return att_means
+
+#clean_data("../data/test_btrain.csv")
+
+
+
+
 # Note: nominal data are integers while numeric data consists of floats
 def parse(filename, keep_unlabeled):
     '''
@@ -74,6 +118,14 @@ def parse(filename, keep_unlabeled):
         'is_nominal': True
     }]
 
+    att_means = clean_data(fileToRead, attributes)
+
+    csvfile = open(filename,'rb')
+    fileToRead = csv.reader(csvfile, delimiter=' ',quotechar=',')
+
+    # skip first line of data
+    fileToRead.next()
+
     # iterate through rows of actual data
     for row in fileToRead:
         # change each line of data into an array
@@ -83,7 +135,8 @@ def parse(filename, keep_unlabeled):
         for i in range(len(temp)):
             # data preprocessing
             if temp[i] == '?':
-                temp[i] = None
+                temp[i] = att_means[i]
+
             elif attributes[i]['is_nominal']:
                 temp[i] = int(temp[i])
             else:
@@ -101,11 +154,10 @@ def parse(filename, keep_unlabeled):
     attributes.rotate(1)
     attributes = list(attributes)
 
-
     return array, attributes
 
 data = parse("../data/test_btrain.csv", True)[0]
 
 attributes = parse("../data/test_btrain.csv", True)[1]
 
-print attributes
+#print data
