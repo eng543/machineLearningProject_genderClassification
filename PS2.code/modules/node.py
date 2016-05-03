@@ -28,7 +28,7 @@ class Node:
         self.is_nominal = None
         #self.value = None
         self.splitting_value = None
-        self.children = {}
+        self.children = None #Nathan - checkign
         self.name = None
 
     def __repr__(self):
@@ -77,7 +77,10 @@ class Node:
                     split_value = next_node.splitting_value
 
             return next_node
-
+        
+    #for i in data.keys():
+    #    root.children.add[i] = child_node
+        
     def print_tree(self, indent = 0):
         '''
         returns a string of the entire tree in human readable form
@@ -97,45 +100,44 @@ class Node:
         returns the disjunct normalized form of the tree.
         '''
         pass
+    
+"""
+newInstance = [1, 0.6, 1, 0] # outcome, homeaway, dayssincegame, weather
+attNames = ["outcome", "homeaway", "dayssincegame", "weather"]
 
-#newInstance = [1, 0.6, 1, 0] # outcome, homeaway, dayssincegame, weather
-#attNames = ["outcome", "homeaway", "dayssincegame", "weather"]
-
-#tree = Node()
-#subtree1 = Node()
-#subtree2 = Node()
-
-# output nodes
-#n0 = Node()
-#n0.label = 0
-#n1 = Node()
-#n1.label = 1
+tree = Node()
+subtree1 = Node()
+subtree2 = Node()
+ #output nodes
+n0 = Node()
+n0.label = 0
+n1 = Node()
+n1.label = 1
 
 
-#tree.decision_attribute = 1
-#tree.name = "dayssincegame"
-#tree.is_nominal = False
-#tree.splitting_value = 2
-#tree.children = [subtree1, subtree2]
+tree.decision_attribute = 1
+tree.name = "dayssincegame"
+tree.is_nominal = False
+tree.splitting_value = 2
+tree.children = [subtree1, subtree2]
 
-#subtree1.decision_attribute = 2
-#subtree1.name = "homeaway"
-#subtree1.is_nominal = True
-#subtree1.children = {1: subtree2, 0: n0}
+subtree1.decision_attribute = 2
+subtree1.name = "homeaway"
+subtree1.is_nominal = True
+subtree1.children = {1: subtree2, 0: n0}
 
-#subtree2.decision_attribute = 3
-#subtree2.name = "weather"
-#subtree2.is_nominal = True
-#subtree2.children = {0: n1, 1: n0, -1: n0}
+subtree2.decision_attribute = 3
+subtree2.name = "weather"
+subtree2.is_nominal = True
+subtree2.children = {0: n1, 1: n0, -1: n0}
 
-#output = tree.classify(newInstance)
+output = tree.classify(newInstance)
 
-#print output
-
-        # output from parse:
-            #data[0] = array of arrays with attribute values
-            #data[1] = dictionary {is_nominal: T/F, name: attributeName}
-
-        # running decision_tree_driver
-            # train_set = data[0]
-            # attribute_metadata = data[1]
+print output
+"""
+#output from parse:
+#data[0] = array of arrays with attribute values
+#data[1] = dictionary {is_nominal: T/F, name: attributeName}
+#running decision_tree_driver:
+#train_set = data[0]
+#attribute_metadata = data[1]

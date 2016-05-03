@@ -16,19 +16,18 @@ def check_homogenous(data_set):
     '''
     # Your code here
     # if homogeneous, means that the tree is finished
-    outcomes = []
+    outcomes = [] #Nathan - moved this bit here
     for i in range(0, len(data_set)):
         outcomes.append([data_set[i][0]])
-
+        
     positive_count = 0
     negative_count = 0
 
-    for i in range(0, len(data_set)):
-        if data_set[i] == [1]:
+    for i in range(0, len(outcomes)):
+        if outcomes[i] == [1]:
             positive_count += 1
         else:
             negative_count += 1
-
     if (positive_count != 0) and (negative_count != 0):
         return None
     else:
@@ -68,6 +67,7 @@ def gain_ratio_nominal(data_set, attribute):
     # dict of attribute values and relevant examples
     nom_dict = split_on_nominal(data_set, attribute)
 
+
     subset_entropy = 0
     intrinsic_value = 0
 
@@ -86,20 +86,30 @@ def gain_ratio_nominal(data_set, attribute):
         subset_entropy += prob_value * relative_entropy
 
         # intrinsic value
-        intrinsic_value +=  - prob_value * math.log(prob_value, 2)
-
-    ratio = (total_entropy - subset_entropy)/intrinsic_value
-
-    return ratio
+        intrinsic_value += - prob_value * math.log(prob_value, 2)
+    if intrinsic_value == 0:
+        ratio = 0
+    else:
+        ratio = (total_entropy - subset_entropy)/intrinsic_value
+        
+    if ratio < 0.0001: #Nathan: epsilon
+        return 0
+    else:
+        return ratio
 
 # ======== Test case =============================
 #data_set, attr = [[1, 2], [1, 0], [1, 0], [0, 2], [0, 2], [0, 0], [1, 3], [0, 4], [0, 3], [1, 1]], 1
-#print gain_ratio_nominal(data_set,attr) #== 0.11470666361703151
-
+#print gain_ratio_nominal(data_set,attr) == 0.11470666361703151
 #data_set, attr = [[1, 2], [1, 2], [0, 4], [0, 0], [0, 1], [0, 3], [0, 0], [0, 0], [0, 4], [0, 2]], 1
-#print gain_ratio_nominal(data_set,attr) #== 0.2056423328155741
+#print gain_ratio_nominal(data_set,attr) == 0.2056423328155741
 #data_set, attr = [[0, 3], [0, 3], [0, 3], [0, 4], [0, 4], [0, 4], [0, 0], [0, 2], [1, 4], [0, 4]], 1
-#print gain_ratio_nominal(data_set,attr) #== 0.06409559743967516
+#print gain_ratio_nominal(data_set,attr) == 0.06409559743967516
+
+#data_set, attr = [[0, 3, 0], [0, 3, 1], [0, 3, 1], [0, 4, 2], [0, 4, 2], [0, 4, 3], [0, 0, 0], [0, 2, 1], [1, 4, 2], [0, 4, 2]], 2
+#print gain_ratio_nominal(data_set,attr) 
+
+#data_set, attr = [[0, 3, 0], [0, 3, 0], [0, 3, 0], [0, 4, 0], [0, 4, 0], [0, 4, 0], [0, 0, 0], [0, 2, 0], [1, 4, 1], [0, 4, 0]], 2
+#print gain_ratio_nominal(data_set,attr) #== 1.0
 
 
 def mode(data_set):
@@ -112,14 +122,14 @@ def mode(data_set):
     Output: mode of index 0.
     ========================================================================================================
     '''
-    outcomes = []
+    outcomes = [] #Nathan - added this bit for simplicity
     for i in range(0, len(data_set)):
         outcomes.append([data_set[i][0]])
-
+        
     positive_count = 0
     negative_count = 0
-    for i in range(0, len(data_set)):
-        if data_set[i] == [1]:
+    for i in range(0, len(outcomes)):
+        if outcomes[i] == [1]:
             positive_count += 1
         else:
             negative_count += 1
@@ -130,10 +140,10 @@ def mode(data_set):
         return 0
 
 # ======== Test case =============================
-# data_set = [[0],[1],[1],[1],[1],[1]]
-# mode(data_set) == 1
-# data_set = [[0],[1],[0],[0]]
-# mode(data_set) == 0
+#data_set = [[0],[1],[1],[1],[1],[1]]
+#print mode(data_set) == 1
+#data_set = [[0],[1],[0],[0]]
+#print mode(data_set) == 0
 
 def entropy(data_set):
     '''
@@ -174,12 +184,12 @@ def entropy(data_set):
         return 0
 
 # ======== Test case =============================
-# data_set = [[0],[1],[1],[1],[0],[1],[1],[1]]
-# entropy(data_set) == 0.811
-# data_set = [[0],[0],[1],[1],[0],[1],[1],[0]]
-# entropy(data_set) == 1.0
-# data_set = [[0],[0],[0],[0],[0],[0],[0],[0]]
-# entropy(data_set) == 0
+#data_set = [[0],[1],[1],[1],[0],[1],[1],[1]]
+#entropy(data_set) == 0.811
+#data_set = [[0],[0],[1],[1],[0],[1],[1],[0]]
+#print entropy(data_set) == 1.0
+#data_set = [[0],[0],[0],[0],[0],[0],[0],[0]]
+#print entropy(data_set) == 0
 
 def get_hits(data_set):
     '''
@@ -220,17 +230,21 @@ def split_on_nominal(data_set, attribute):
         values_dict[val] = []
 
     for i in range(0, len(data_set)):
-        att_value = data_set[i][1]
+        att_value = data_set[i][attribute] #Nathan Corrected error: data_set[i][1] -> data_set[i][attribute]
         values_dict[att_value].append(data_set[i])
 
     return values_dict
 
 # ======== Test case =============================
-# data_set, attr = [[0, 4], [1, 3], [1, 2], [0, 0], [0, 0], [0, 4], [1, 4], [0, 2], [1, 2], [0, 1]], 1
-# split_on_nominal(data_set, attr) == {0: [[0, 0], [0, 0]], 1: [[0, 1]], 2: [[1, 2], [0, 2], [1, 2]], 3: [[1, 3]], 4: [[0, 4], [0, 4], [1, 4]]}
+#data_set, attr = [[0, 4], [1, 3], [1, 2], [0, 0], [0, 0], [0, 4], [1, 4], [0, 2], [1, 2], [0, 1]], 1
+#print split_on_nominal(data_set, attr) == {0: [[0, 0], [0, 0]], 1: [[0, 1]], 2: [[1, 2], [0, 2], [1, 2]], 3: [[1, 3]], 4: [[0, 4], [0, 4], [1, 4]]}
 #data_set, attr = [[1, 2], [1, 0], [0, 0], [1, 3], [0, 2], [0, 3], [0, 4], [0, 4], [1, 2], [0, 1]], 1
-#print split_on_nominal(data_set, attr) #== {0: [[1, 0], [0, 0]], 1: [[0, 1]], 2: [[1, 2], [0, 2], [1, 2]], 3: [[1, 3], [0, 3]], 4: [[0, 4], [0, 4]]}
+#print split_on_nominal(data_set, attr) == {0: [[1, 0], [0, 0]], 1: [[0, 1]], 2: [[1, 2], [0, 2], [1, 2]], 3: [[1, 3], [0, 3]], 4: [[0, 4], [0, 4]]}
+#data_set, attr = [[1, 2, 2], [1, 0, 1], [0, 0, 0], [1, 3, 1], [0, 2, 1], [0, 3, 1], [0, 4, 1], [0, 4, 1], [1, 2, 2], [0, 1, 2]], 1
+#print split_on_nominal(data_set, attr)
 
+#data_set, attr = [[0, 3, 0], [0, 3, 1], [0, 3, 1], [0, 4, 2], [0, 4, 2], [0, 4, 3], [0, 0, 0], [0, 2, 1], [1, 4, 2], [0, 4, 2]], 2
+#print split_on_nominal(data_set, attr)
 
 def gain_ratio_numeric(data_set, attribute, steps):
     '''
@@ -270,19 +284,21 @@ def gain_ratio_numeric(data_set, attribute, steps):
             k += steps
     else:
         print("boohoo we failed")
-
     ratios = {}
 
     for step in step_indices:
-        temp_split_value = data_set[step][1]
+        temp_split_value = data_set[step][attribute] #Nathan: data_set[step][1] -> data_set[step][attribute]
 
         # anything less than split value is in list at 0th index, greater than equal to in 1th index
         subset_split = [[],[]]
         for i in range(0, len(data_set)):
-            if data_set[i][1] < temp_split_value:
+            #print data_set[i][1], data_set[i][attribute]
+            if data_set[i][attribute] < temp_split_value: #Nathan: data_set[step][1] -> data_set[step][attribute]
                 subset_split[0].append([data_set[i][0]])
+                #print subset_split
             else:
                 subset_split[1].append([data_set[i][0]])
+                #print subset_split
 
         subset_entropy = 0
         intrinsic_value = 0
@@ -306,24 +322,30 @@ def gain_ratio_numeric(data_set, attribute, steps):
             ratio = 0
         else:
             ratio = (total_entropy - subset_entropy) / intrinsic_value
+            #print (total_entropy - subset_entropy)
 
         ratios[ratio] = temp_split_value
-
+    #print 'grnum =', ratios, '\n'
     max_ratio = max(ratios.keys())
-
-    optimum_threshold = ratios[max_ratio]
-
-    output = (max_ratio, optimum_threshold)
-    return output
+    #print 'grnum max_ratio =', max_ratio, '\n'
+    if max_ratio < 0.0001: #Nathan: epsilon
+        return 0
+    else:
+        optimum_threshold = ratios[max_ratio]
+        output = (max_ratio, optimum_threshold)
+        return output
 
 
 # ======== Test case =============================
 #data_set,attr,step = [[1,0.05], [1,0.17], [1,0.64], [0,0.38], [0,0.19], [1,0.68], [1,0.69], [1,0.17], [1,0.4], [0,0.53]], 1, 2
-#print gain_ratio_numeric(data_set,attr,step) #== (0.21744375685031775, 0.19)
+#print gain_ratio_numeric(data_set,attr,step) == (0.21744375685031775, 0.19)
 #data_set,attr,step = [[1, 0.35], [1, 0.24], [0, 0.67], [0, 0.36], [1, 0.94], [1, 0.4], [1, 0.15], [0, 0.1], [1, 0.61], [1, 0.17]], 1, 4
-#print gain_ratio_numeric(data_set,attr,step) #== (0.11689800358692547, 0.94)
+#print gain_ratio_numeric(data_set,attr,step) == (0.11689800358692547, 0.94)
 #data_set,attr,step = [[1, 0.1], [0, 0.29], [1, 0.03], [0, 0.47], [1, 0.25], [1, 0.12], [1, 0.67], [1, 0.73], [1, 0.85], [1, 0.25]], 1, 1
 #print gain_ratio_numeric(data_set,attr,step) == (0.23645279766002802, 0.29)
+
+#data_set,attr,step = [[1, 0.1, 0.95], [0, 0.29, 0], [1, 0.03, 0.82], [0, 0.47, 0.03], [1, 0.25, 0.84], [1, 0.12, 0.82], [1, 0.67, 0.6], [1, 0.73, 0.6], [1, 0.85, 0.9], [1, 0.25, 0.99]], 2, 1
+#print gain_ratio_numeric(data_set,attr,step)
 
 
 def split_on_numerical(data_set, attribute, splitting_value):
@@ -350,10 +372,10 @@ def split_on_numerical(data_set, attribute, splitting_value):
     return (less_than, greater_than)
 
 # ======== Test case =============================
-# d_set,a,sval = [[1, 0.25], [1, 0.89], [0, 0.93], [0, 0.48], [1, 0.19], [1, 0.49], [0, 0.6], [0, 0.6], [1, 0.34], [1, 0.19]],1,0.48
-# split_on_numerical(d_set,a,sval) == ([[1, 0.25], [1, 0.19], [1, 0.34], [1, 0.19]],[[1, 0.89], [0, 0.93], [0, 0.48], [1, 0.49], [0, 0.6], [0, 0.6]])
-# d_set,a,sval = [[0, 0.91], [0, 0.84], [1, 0.82], [1, 0.07], [0, 0.82],[0, 0.59], [0, 0.87], [0, 0.17], [1, 0.05], [1, 0.76]],1,0.17
-# split_on_numerical(d_set,a,sval) == ([[1, 0.07], [1, 0.05]],   [[0, 0.91],[0, 0.84], [1, 0.82], [0, 0.82], [0, 0.59], [0, 0.87], [0, 0.17], [1, 0.76]])
+#d_set,a,sval = [[1, 0.25], [1, 0.89], [0, 0.93], [0, 0.48], [1, 0.19], [1, 0.49], [0, 0.6], [0, 0.6], [1, 0.34], [1, 0.19]],1,0.48
+#print split_on_numerical(d_set,a,sval) == ([[1, 0.25], [1, 0.19], [1, 0.34], [1, 0.19]],[[1, 0.89], [0, 0.93], [0, 0.48], [1, 0.49], [0, 0.6], [0, 0.6]])
+#d_set,a,sval = [[0, 0.91], [0, 0.84], [1, 0.82], [1, 0.07], [0, 0.82],[0, 0.59], [0, 0.87], [0, 0.17], [1, 0.05], [1, 0.76]],1,0.17
+#print split_on_numerical(d_set,a,sval) == ([[1, 0.07], [1, 0.05]],[[0, 0.91],[0, 0.84], [1, 0.82], [0, 0.82], [0, 0.59], [0, 0.87], [0, 0.17], [1, 0.76]])
 
 def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
     '''
@@ -366,29 +388,38 @@ def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
             Only consider numeric splits for which numerical_splits_count is greater than zero
     ========================================================================================================
     Output: best attribute, split value if numeric
-    ========================================================================================================
     '''
+
     ratios = {}
 
-    for i in range(1, len(data_set[0])):
-        if attribute_metadata[i]['is_nominal'] == 1:
+    for i in range(1, len(data_set[0])): # Assumes all points have same number of features, which they definitely should
+        if attribute_metadata[i]['is_nominal'] == True: #Nathan: Just changed 1 to True to fix some of my brain confusion
             gain_ratio = gain_ratio_nominal(data_set, i)
             ratios[(i, False)] = gain_ratio
 
         else:
             if numerical_splits_count[i] != 0:
-                gain_ratio = gain_ratio_numeric(data_set, i, 1)
-                ratios[(i, gain_ratio[1])] = gain_ratio[0]
+                gain_ratio = gain_ratio_numeric(data_set, i, 1) #Nathan: May have to change 1 to steps here - need to doublecheck grading method
+                if gain_ratio != 0:
+                    ratios[(i, gain_ratio[1])] = gain_ratio[0]
+                else:
+                    pass
             else:
                 pass
-
-    max_ratio = max(ratios.values())
-    best_attribute = [x for x,y in ratios.items() if y == max_ratio]
-
-    return best_attribute[0]
+    #print ratios        
+    if len(ratios) != 0: #Nathan: Exception handling
+        max_ratio = max(ratios.values())
+        #print 'pba max_ratio =', max_ratio
+        if max_ratio != 0:
+            best_attribute = [x for x,y in ratios.items() if y == max_ratio]
+            return best_attribute[0]
+        else:
+            return (False, False)
+    else:
+        return (False, False)
 
 # # ======== Test Cases =============================
-#numerical_splits_count = [20,20]
+#numerical_splits_count = [20,20,20]
 #attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "opprundifferential",'is_nominal': False}]
 #data_set = [[1, 0.27], [0, 0.42], [0, 0.86], [0, 0.68], [0, 0.04], [1, 0.01], [1, 0.33], [1, 0.42], [0, 0.51], [1, 0.4]]
 #print pick_best_attribute(data_set, attribute_metadata, numerical_splits_count) == (1, 0.51)
@@ -397,6 +428,18 @@ def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
 #data_set = [[0, 0], [1, 0], [0, 2], [0, 2], [0, 3], [1, 1], [0, 4], [0, 2], [1, 2], [1, 5]]
 #print pick_best_attribute(data_set, attribute_metadata, numerical_splits_count) == (1, False)
 
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "weather",'is_nominal': True}, {'name': "dummy",'is_nominal': True}]
+#data_set = [[0, 0, 0], [1, 0, 0], [0, 2, 1], [0, 2, 1], [0, 3, 3], [1, 1, 2], [0, 4, 1], [0, 2, 3], [1, 2, 4], [1, 5, 2]]
+#print pick_best_attribute(data_set, attribute_metadata, numerical_splits_count) == (2, False)
+
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "weather",'is_nominal': False}, {'name': "dummy",'is_nominal': False}]
+#data_set = [[0, 0, 0.3], [1, 0, 0.11], [0, 2, 0.7], [0, 2, 0.9], [0, 3, 0.4], [1, 1, 0.13], [0, 4, 0.1], [0, 2, 0.3], [1, 2, 0.11], [1, 5, 0.12]]
+#print pick_best_attribute(data_set, attribute_metadata, numerical_splits_count)
+
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "opprundifferential",'is_nominal': False}]
+#data_set = [[1, 0.1], [0, 0.1], [0, 0.1], [0, 0.1], [0, 0.1], [1, 0.1], [1, 0.1], [1, 0.1], [0, 0.1], [1, 0.1]]
+#print pick_best_attribute(data_set, attribute_metadata, numerical_splits_count)
+# Uses gain_ratio_nominal or gain_ratio_numeric to calculate gain ratio.
 
 def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
     '''
@@ -409,68 +452,81 @@ def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
     ========================================================================================================
     Output: The node representing the decision tree learned over the given data set
     ========================================================================================================
-
     '''
     # Your code here
 
     root = Node()
-
-    if depth == 0:
+    #print 'depth =', depth
+    
+    if depth == 0: #Depth check
         root.label = mode(data_set)
-
     else:
         root.label = check_homogenous(data_set)
 
-    print root.label
-
-    if root.label != None:
-        return root
-
+    #print 'label=', root.label
+    if root.label != None: #If data set isn't homogeneous or max depth
+        return root # Finished with this branch
     else:
         best_att = pick_best_attribute(data_set, attribute_metadata, numerical_splits_count)
-        root.decision_attribute = best_att[0]
-        root.is_nominal = attribute_metadata[best_att[0]]['is_nominal']
-        root.splitting_value = best_att[1]
-        root.name = attribute_metadata[best_att[0]]['name']
-        child_numerical_splits_count = numerical_splits_count
-
-        print best_att
-
-        if root.is_nominal == True:
-            root.children = {}
-            data = split_on_nominal(data_set, root.decision_attribute)
-            sub_depth = depth - 1
-
-            for i in data.keys():
-                new_node = ID3(data[i], attribute_metadata, child_numerical_splits_count, sub_depth)
-                root.children[i] = new_node
-
-        elif root.is_nominal == False:
-            root.children = []
-            data = split_on_numerical(data_set, root.decision_attribute, root.splitting_value)
-            child_numerical_splits_count[root.decision_attribute] = child_numerical_splits_count[root.decision_attribute] - 1
-            sub_depth = depth - 1
-
-            for i in range(len(data)):
-                new_node = ID3(data[i], attribute_metadata, child_numerical_splits_count, sub_depth)
-                root.children.append(new_node)
-
-    #outcomes = []
+        #print 'best_att=', best_att
+        #print 'data_set=', data_set
+        if best_att == (False, False): #Nathan: Exception here since (False, False) can be interpreted as (0, False) and ID3 tries to split on the class
+            root.label = mode(data_set)
+            #print 'False, False -> label=', root.label
+            return root
+        else:
+            root.decision_attribute = best_att[0]
+            root.is_nominal = attribute_metadata[best_att[0]]['is_nominal']
+            root.splitting_value = best_att[1]
+        
+    #outcomes = [] # this is the classes in the data_set - #Nathan: moved all this to check_homogeneous
     #for i in range(0, len(data_set)):
     #    outcomes.append([data_set[i][0]])
     #done = check_homogenous(outcomes)
     #root.label = done
-
-
+    
+            root.name = attribute_metadata[best_att[0]]['name']      
+            child_numerical_splits_count = numerical_splits_count
     ### this is not correct
     # root.children should not have subset datasets in values for each attribute thing
-    # could just leave it and override later with the new branching nodes
-    #if root.is_nominal == True:
-    #    root.children = split_on_nominal(data_set, root.decision_attribute)
-    #else:
-    #    root.children = split_on_numerical(data_set, root.decision_attribute, root.splitting_value)
+            if root.is_nominal == True:
+                root.children = {}
+                data = split_on_nominal(data_set, root.decision_attribute)
+                sub_depth = depth - 1
+                for i in data.keys():
+                    new_node = ID3(data[i], attribute_metadata, child_numerical_splits_count, sub_depth)
+                    #print new_node, 'nom'
+                    #print [new_node.classify(x) == x[0] for x in data_set]
+                    root.children[i] = new_node
+                #root.children = split_on_nominal(data_set, root.decision_attribute)
+            
+            elif root.is_nominal == False:
+                root.children = []
+                data = split_on_numerical(data_set, root.decision_attribute, root.splitting_value)
+                child_numerical_splits_count[root.decision_attribute] = child_numerical_splits_count[root.decision_attribute]-1
+                sub_depth = depth - 1
+                for i in range(len(data)):
+                    new_node = ID3(data[i], attribute_metadata, child_numerical_splits_count, sub_depth)
+                    #print new_node, 'num'
+                    root.children.append(new_node)
 
+            else:
+                print 'Troubles brewing'
+            
+    return root
 
+#                best_feature_values = {s.sample[best_feature]
+#                                       for s in training_samples}
+#                for value in best_feature_values:
+#                    samples = [s for s in training_samples
+#                               if s.sample[best_feature] == value]
+#                    # Recursively, create a child node.
+#                    root.children = create_decision_tree(samples,
+#                                                      predicting_features)
+#                    root_node[value] = child
+#        return root_node
+    
+    
     #while tree.label == None:
     # GenerateTree(X)
     # If NodeEntropy(X) < ThresholdI   **entropy equation 9.3 <---- function below
@@ -504,7 +560,46 @@ def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
 
     # somewhere deal with the numerical_splits_count thing
 
-numerical_split_counts = [1, 1]
-attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "opprundifferential",'is_nominal': False}]
-data_set = [[1, 0.27], [0, 0.42], [0, 0.86], [0, 0.68], [0, 0.04], [1, 0.01], [1, 0.33], [1, 0.42], [1, 0.42], [0, 0.51], [1, 0.4]]
-print ID3(data_set, attribute_metadata, numerical_split_counts, 0)
+#numerical_split_counts = [20, 20, 20]
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "weather",'is_nominal': True}, {'name': "dummy",'is_nominal': True}]
+#data_set = [[0, 0, 2], [1, 0, 3], [0, 2, 1], [0, 2, 3], [0, 3, 2], [1, 1, 1], [0, 4, 3], [0, 2, 3], [1, 2, 3], [1, 5, 0]]
+#print ID3(data_set, attribute_metadata, numerical_split_counts, depth = 5)
+
+#numerical_split_counts = [20, 20, 20]
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "weather",'is_nominal': True}, {'name': "dummy",'is_nominal': False}]
+#data_set = [[0, 0, 0.3], [1, 0, 0.11], [0, 2, 0.7], [0, 2, 0.9], [0, 3, 0.4], [1, 1, 0.13], [0, 4, 0.1], [0, 2, 0.3], [1, 2, 0.11], [1, 5, 0.12]]
+#print ID3(data_set, attribute_metadata, numerical_split_counts, depth = 5)
+
+#numerical_split_counts = [20, 20, 20]
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "weather",'is_nominal': True}, {'name': "dummy",'is_nominal': False}]
+#data_set = [[0, 0, 0.1], [1, 0, 8], [0, 2, 0.2], [0, 2, 0.1], [0, 3, 0.4], [1, 1, 10], [0, 4, 0.1], [0, 2, 0.1], [1, 2, 15], [1, 5, 3]]
+#print ID3(data_set, attribute_metadata, numerical_split_counts, depth = 0)
+
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "opprundifferential",'is_nominal': False}]
+#data_set = [[0, 0.27], [0, 0.42], [0, 0.86], [0, 0.68], [0, 0.04], [0, 0.01], [0, 0.33], [0, 0.42], [0, 0.42], [0, 0.51], [0, 0.4]]
+#numerical_splits_count = [5, 5]
+#print ID3(data_set, attribute_metadata, numerical_splits_count, 0)
+
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "opprundifferential",'is_nominal': False}]
+#data_set = [[1, 0.27], [0, 0.42], [0, 0.86], [0, 0.68], [0, 0.04], [1, 0.01], [1, 0.33], [1, 0.42], [1, 0.42], [0, 0.51], [1, 0.4]]
+#numerical_splits_count = [1, 1]
+#n = ID3(data_set, attribute_metadata, numerical_splits_count, 5)
+#print n == [True, False, True, True, False, True, True, True, True, True, True]
+
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "opprundifferential",'is_nominal': False}]
+#data_set = [[1, 0.27], [0, 0.42], [0, 0.86], [0, 0.68], [0, 0.04], [1, 0.01], [1, 0.33], [1, 0.42], [1, 0.42], [0, 0.51], [1, 0.4]]
+#numerical_splits_count = [5, 5]
+#print ID3(data_set, attribute_metadata, numerical_splits_count, 5)
+#print n
+#n_classify = [n.classify(x) == x[0] for x in data_set]
+#print n_classify
+#if n and [n.classify(x) == x[0] for x in data_set] == [True, False, True, True, False, True, True, True, True, True, True]:
+
+#attribute_metadata = [{'name': "winner",'is_nominal': True},{'name': "opprundifferential",'is_nominal': False}]
+#data_set = [[1, 0.27], [0, 0.42], [0, 0.86], [0, 0.68], [0, 0.04], [1, 0.01], [1, 0.33], [1, 0.42], [1, 0.42], [0, 0.51], [1, 0.4]]
+#numerical_splits_count = [5, 5]
+#n = ID3(data_set, attribute_metadata, numerical_splits_count, 5)
+# n and [n.classify(x) == x[0] for x in data_set] == [True, False, True, True, True, True, True, True, True, True, True]:
+#print n
+#n_classify = [n.classify(x) == x[0] for x in data_set]
+#print n_classify
