@@ -1,6 +1,6 @@
 import csv, collections
 
-def clean_data(fileToRead, attributes):
+def clean_data(filename, attributes):
     '''
     deal with missing data
     called inside parse function
@@ -8,6 +8,12 @@ def clean_data(fileToRead, attributes):
     nominal: impute mode
     numeric: impute mean
     '''
+
+    csvfile = open(filename,'rb')
+    fileToRead = csv.reader(csvfile, delimiter=' ',quotechar=',')
+
+    # skip first line of data
+    fileToRead.next()
 
     att_values = {}
 
@@ -118,13 +124,7 @@ def parse(filename, keep_unlabeled):
         'is_nominal': True
     }]
 
-    att_means = clean_data(fileToRead, attributes)
-
-    csvfile = open(filename,'rb')
-    fileToRead = csv.reader(csvfile, delimiter=' ',quotechar=',')
-
-    # skip first line of data
-    fileToRead.next()
+    att_means = clean_data(filename, attributes)
 
     # iterate through rows of actual data
     for row in fileToRead:
