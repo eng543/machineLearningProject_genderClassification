@@ -41,7 +41,7 @@ class Node:
 
         current_label = self.label
 
-        if current_label == 1:
+        if current_label == 1 or current_label == 0:
             return current_label
 
         else:
@@ -97,9 +97,77 @@ class Node:
 
     def print_dnf_tree(self):
         '''
-        returns the disjunct normalized form of the tree.
+        returns the disjunct normalized form of the tree. This implementation doesn't give simplest
+        label decision first, but I don't know if it matters.
+        
         '''
-        pass
+        storage ={0: [], 1: []}
+        paths = []
+        output = 'IF '
+        winners = self.get_leaves(self, storage, paths)
+        
+        for i in range(len(winners[1])):
+            output = output + '( '
+            for j in range(len(winners[1][i])):
+                if winners[1][i][j][1] == -1:
+                    output = output + str(winners[1][i][j][0]) + ' == ' + str(winners[1][i][j][2]) + ' '
+                else:
+                    output = output + str(winners[1][i][j][0]) + ' ' + str(winners[1][i][j][2]) + ' ' + str(winners[1][i][j][1]) + ' '
+                if j != len(winners[1][i])-1:
+                    output = output + 'AND '
+            output = output + ') '
+            if i !=len(winners[1])-1:
+                output = output + 'OR '
+        return output
+        
+        
+    def get_leaves(self, root, storage, path):
+        '''
+        Given a node, will get a dictionary of all paths to labels. Currently described in 
+        terms of attribute name rather than index. May be problematic for pruning - may want to
+        return both in the storage dict.
+        '''
+        current_label = root.label
+        current_children = root.children
+        
+        node_index = root.name
+        split_value = root.splitting_value
+
+        if current_label == 1 or current_label == 0:
+            storage[current_label].append(path)
+            
+        else:
+
+            current_children = root.children
+            split_value = root.splitting_value
+            nominal = root.is_nominal
+            
+            if nominal == True:
+                for key in current_children.keys():
+                    sub_path = copy.copy(path)
+                    sub_path.append([node_index, -1, key])
+                    cur = current_children[key]
+                    self.get_leaves(cur, storage, sub_path)
+            
+            
+            else:
+                for i in range(len(current_children)):
+                    cur = current_children[i]
+                    if i == 0:
+                        sub_path = copy.copy(path)
+                        sub_path.append([node_index, split_value, '<'])
+                    elif i == 1:
+                        sub_path = copy.copy(path)
+                        sub_path.append([node_index, split_value, '>='])
+                    else:
+                        print 'wut'
+                    self.get_leaves(cur, storage, sub_path)
+            
+        return storage
+    
+
+            
+        
     
 """
 newInstance = [1, 0.6, 1, 0] # outcome, homeaway, dayssincegame, weather
@@ -141,3 +209,83 @@ print output
 #running decision_tree_driver:
 #train_set = data[0]
 #attribute_metadata = data[1]
+
+
+
+'''
+n0 = Node()
+n1 = Node()
+
+
+n = Node()
+n.label = None
+n.decision_attribute = 1
+n.is_nominal = False
+n.splitting_value = 0.5
+n.name = "Numerical attribute"
+
+
+n0.label = None
+n1.label = None
+#n.children = {1: n0, 2: n1}
+n.children = [n0, n1]
+n2 = Node()
+n2.label = 0
+n3 = Node()
+n3.label = 1
+n0.children = [n2, n3]
+n0.decision_attribute = 2
+n0.is_nominal = False
+n0.splitting_value = 1.5
+n0.name = "Second Numerical attribute"
+n4 = Node()
+n4.label = 0
+n5 = Node()
+n5.label = 1
+n4.label = 0
+n5.label = 1
+n1.children = [n4, n5]
+n1.decision_attribute = 3
+n1.is_nominal = False
+n1.splitting_value = 3.5
+
+#storage1 ={0: [], 1: []}
+#path1 = []
+#n.get_leaves(n, storage1, path1) # get_leaves requires storage1 and path1 to be assigned prior, print_dnf_tree doesnt
+#n.print_dnf_tree()
+'''
+
+'''
+n0 = Node()
+n1 = Node()
+n2 = Node()
+
+
+n = Node()
+n.label = None
+n.decision_attribute = 1
+n.is_nominal = True
+n.name = "Nominal attribute"
+n0.label = None
+n1.label = 1
+n2.label = 0
+n.children = {0: n0, 1: n1, 2: n2}
+
+n3 = Node()
+n4 = Node()
+
+n0.decision_attribute = 2
+n0.is_nominal = False
+n0.splitting_value = 0.124123412312
+n0.children = {0: n3, 1: n4}
+n0.name = 'Numerical attribute'
+n3.label = 0
+n4.label = 1
+
+
+
+#storage1 ={0: [], 1: []} 
+#path1 = []
+#n.get_leaves(n, storage1, path1) # get_leaves requires storage1 and path1 to be assigned prior, print_dnf_tree doesnt
+#n.print_dnf_tree()
+'''
