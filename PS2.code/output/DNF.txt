@@ -1,0 +1,131 @@
+IF 
+( numinjured < 1.0 ^ oppnuminjured < 1.0 ^ oppwinningpercent < 0.381126765 ^ opprundifferential < 46.0 ) v 
+( numinjured < 1.0 ^ oppnuminjured < 1.0 ^ oppwinningpercent >= 0.381126765 ^ numinjured < 0.0 ^ numinjured == >= ) v 
+( numinjured < 1.0 ^ oppnuminjured < 1.0 ^ oppwinningpercent >= 0.381126765 ^ numinjured >= 0.0 ) v 
+( numinjured < 1.0 ^ oppnuminjured >= 1.0 ^ opprundifferential < 18.0 ^ rundifferential >= 24.0 ) v 
+( numinjured < 1.0 ^ oppnuminjured >= 1.0 ^ opprundifferential >= 18.0 ^ rundifferential < 9.0 ^ startingpitcher == 1 ) v 
+( numinjured < 1.0 ^ oppnuminjured >= 1.0 ^ opprundifferential >= 18.0 ^ rundifferential >= 9.0 ^ opprundifferential < 25.0 ^ winpercent >= 0.677622692 ) v 
+( numinjured < 1.0 ^ oppnuminjured >= 1.0 ^ opprundifferential >= 18.0 ^ rundifferential >= 9.0 ^ opprundifferential >= 25.0 ^ opprundifferential < 43.0 ^ rundifferential < 82.0 ^ oppdayssincegame < 1.0 ^ temperature >= 66.931383 ) v 
+( numinjured < 1.0 ^ oppnuminjured >= 1.0 ^ opprundifferential >= 18.0 ^ rundifferential >= 9.0 ^ opprundifferential >= 25.0 ^ opprundifferential < 43.0 ^ rundifferential >= 82.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent < 0.214639846 ^ oppwinningpercent < 0.095669014 ^ temperature >= 52.89468607 ^ winpercent < 0.575447559 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent < 0.214639846 ^ oppwinningpercent < 0.095669014 ^ temperature >= 52.89468607 ^ winpercent >= 0.575447559 ^ rundifferential < 33.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent < 0.214639846 ^ oppwinningpercent < 0.095669014 ^ temperature >= 52.89468607 ^ winpercent >= 0.575447559 ^ rundifferential >= 33.0 ^ rundifferential >= 66.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent < 0.214639846 ^ oppwinningpercent >= 0.095669014 ^ winpercent < 0.502686529 ^ startingpitcher == 2 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent < 0.214639846 ^ oppwinningpercent >= 0.095669014 ^ winpercent < 0.502686529 ^ startingpitcher == 5 ^ opprundifferential >= 76.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent < 0.280033622 ^ oppstartingpitcher == 1.0 ^ weather == -1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent < 0.280033622 ^ oppstartingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent < 0.280033622 ^ oppstartingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent < 0.280033622 ^ oppstartingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent < 0.339571496 ^ startingpitcher == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent < 0.339571496 ^ startingpitcher == 2 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent < 0.339571496 ^ startingpitcher == 3 ^ numinjured < 2.0 ^ oppdayssincegame >= 4.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent < 0.339571496 ^ startingpitcher == 3 ^ numinjured >= 2.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent < 0.339571496 ^ startingpitcher == 4.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent < 0.339571496 ^ startingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame < 1.0 ^ homeaway == 0 ^ dayssincegame < 3.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame < 1.0 ^ homeaway == 0 ^ dayssincegame >= 3.0 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame < 1.0 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame < 2.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame >= 2.0 ^ weather == 0 ^ oppdayssincegame < 3.0 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame >= 2.0 ^ weather == 0 ^ oppdayssincegame < 3.0 ^ homeaway == 1 ^ temperature < 77.40201889 ^ oppstartingpitcher == 1 ^ dayssincegame >= 3.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame >= 2.0 ^ weather == 0 ^ oppdayssincegame < 3.0 ^ homeaway == 1 ^ temperature < 77.40201889 ^ oppstartingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame >= 2.0 ^ weather == 0 ^ oppdayssincegame < 3.0 ^ homeaway == 1 ^ temperature < 77.40201889 ^ oppstartingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame >= 2.0 ^ weather == 0 ^ oppdayssincegame < 3.0 ^ homeaway == 1 ^ temperature < 77.40201889 ^ oppstartingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame >= 2.0 ^ weather == 0 ^ oppdayssincegame >= 3.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame >= 2.0 ^ weather == 1 ^ temperature < 56.69207295 ^ oppdayssincegame < 3.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame >= 2.0 ^ weather == 1 ^ temperature >= 56.69207295 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured < 2.0 ^ dayssincegame >= 2.0 ^ weather == -1.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured >= 2.0 ^ temperature < 57.09224231 ^ dayssincegame < 3.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured >= 2.0 ^ temperature < 57.09224231 ^ dayssincegame >= 3.0 ^ dayssincegame < 4.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured >= 2.0 ^ temperature < 57.09224231 ^ dayssincegame >= 3.0 ^ dayssincegame >= 4.0 ^ startingpitcher == 4.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured >= 2.0 ^ temperature < 57.09224231 ^ dayssincegame >= 3.0 ^ dayssincegame >= 4.0 ^ startingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent < 0.772496213 ^ oppwinningpercent >= 0.339571496 ^ oppdayssincegame >= 1.0 ^ numinjured >= 2.0 ^ temperature >= 57.09224231 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent >= 0.772496213 ^ weather == 0 ^ oppstartingpitcher == 2 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent >= 0.772496213 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent < 0.81575798 ^ oppwinningpercent >= 0.280033622 ^ winpercent >= 0.772496213 ^ weather == -1 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 2 ^ weather == 0 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 2 ^ weather == 0 ^ homeaway == 1 ^ oppstartingpitcher == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 3 ^ oppstartingpitcher == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 3 ^ oppstartingpitcher == 2 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 3 ^ oppstartingpitcher == 3 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 3 ^ oppstartingpitcher == 3 ^ weather == -1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 3 ^ oppstartingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 4 ^ oppstartingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 5 ^ oppstartingpitcher == 1 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 5 ^ oppstartingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured < 2.0 ^ oppwinningpercent >= 0.214639846 ^ winpercent >= 0.81575798 ^ startingpitcher == 5 ^ oppstartingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 0 ^ startingpitcher == 1 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 0 ^ startingpitcher == 3 ^ weather == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 0 ^ startingpitcher == 3 ^ weather == -1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 0 ^ startingpitcher == 4 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 0 ^ startingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 1 ^ weather == 0 ^ startingpitcher == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 1 ^ weather == 0 ^ startingpitcher == 2 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 1 ^ weather == 0 ^ startingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 1 ^ weather == 0 ^ startingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 1 ^ weather == 1 ^ startingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 1 ^ weather == 1 ^ startingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 1 ^ weather == -1 ^ startingpitcher == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 1 ^ weather == -1 ^ startingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 1 ^ homeaway == 1 ^ weather == -1 ^ startingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 2 ^ startingpitcher == 2 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 2 ^ startingpitcher == 2 ^ homeaway == 1 ^ weather == -1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 2 ^ startingpitcher == 3 ^ homeaway == 1 ^ weather == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 2 ^ startingpitcher == 3 ^ homeaway == 1 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 2 ^ startingpitcher == 4.0 ^ weather == 0 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 2 ^ startingpitcher == 4.0 ^ weather == 1 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 2 ^ startingpitcher == 4.0 ^ weather == 1 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 2 ^ startingpitcher == 4.0 ^ weather == -1 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 2 ^ startingpitcher == 5 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 3 ^ startingpitcher == 1 ^ weather == 0 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 3 ^ startingpitcher == 1 ^ weather == 0 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 3 ^ startingpitcher == 1 ^ weather == -1 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 3 ^ startingpitcher == 2 ^ homeaway == 1 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 3 ^ startingpitcher == 3 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 3 ^ startingpitcher == 4.0 ^ homeaway == 0 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 3 ^ startingpitcher == 4.0 ^ homeaway == 0 ^ weather == -1.0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 3 ^ startingpitcher == 4.0 ^ homeaway == 1 ^ weather == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 3 ^ startingpitcher == 5 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 0 ^ weather == 0 ^ startingpitcher == 2 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 0 ^ weather == 0 ^ startingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 0 ^ weather == 0 ^ startingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 0 ^ weather == -1 ^ startingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 1 ^ startingpitcher == 1 ^ weather == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 1 ^ startingpitcher == 1 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 1 ^ startingpitcher == 2 ^ weather == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 1 ^ startingpitcher == 2 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 1 ^ startingpitcher == 3 ^ weather == -1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 1 ^ startingpitcher == 4 ^ weather == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 1 ^ startingpitcher == 4 ^ weather == -1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 4 ^ homeaway == 1 ^ startingpitcher == 5 ^ weather == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == 0 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == 0 ^ homeaway == 1 ^ startingpitcher == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == 0 ^ homeaway == 1 ^ startingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == 1 ^ startingpitcher == 2 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == 1 ^ startingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == 1 ^ startingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == -1.0 ^ startingpitcher == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == -1.0 ^ startingpitcher == 2 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == -1.0 ^ startingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured < 3.0 ^ oppstartingpitcher == 5 ^ weather == -1.0 ^ startingpitcher == 5 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 0 ^ homeaway == 1 ^ oppstartingpitcher == 1 ^ startingpitcher == 2 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 0 ^ homeaway == 1 ^ oppstartingpitcher == 1 ^ startingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 1 ^ oppstartingpitcher == 1.0 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 1 ^ oppstartingpitcher == 1.0 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 1 ^ oppstartingpitcher == 2 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 1 ^ oppstartingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 3 ^ homeaway == 0 ^ oppstartingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 3 ^ homeaway == 1 ^ oppstartingpitcher == 3 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 3 ^ homeaway == 1 ^ oppstartingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 4.0 ^ oppstartingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 5 ^ oppstartingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == 1 ^ startingpitcher == 5 ^ oppstartingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == -1 ^ oppstartingpitcher == 2 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == -1 ^ oppstartingpitcher == 3 ^ startingpitcher == 3 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == -1 ^ oppstartingpitcher == 3 ^ startingpitcher == 4 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == -1 ^ oppstartingpitcher == 3 ^ startingpitcher == 5 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == -1 ^ oppstartingpitcher == 5 ^ startingpitcher == 2 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == -1 ^ oppstartingpitcher == 5 ^ startingpitcher == 2 ^ homeaway == 1 ) v 
+( numinjured >= 1.0 ^ oppnuminjured < 4.0 ^ oppnuminjured >= 2.0 ^ oppnuminjured >= 3.0 ^ weather == -1 ^ oppstartingpitcher == 5 ^ startingpitcher == 5 ^ homeaway == 0 ) v 
+( numinjured >= 1.0 ^ oppnuminjured >= 4.0 ^ weather == 1 ^ oppstartingpitcher == 4 ) 

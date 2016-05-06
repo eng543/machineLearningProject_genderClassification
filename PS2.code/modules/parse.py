@@ -41,7 +41,7 @@ def clean_data(filename, attributes):
 
         if not attributes[j]['is_nominal']:
             # use mean of attribute
-            att_means[j] = sum(att_values[j])/float(len(att_values[j]))
+            att_means[j] = int(sum(att_values[j])/float(len(att_values[j])))
 
     return att_means
 
@@ -135,7 +135,10 @@ def parse(filename, keep_unlabeled):
         for i in range(len(temp)):
             # data preprocessing
             if temp[i] == '?':
-                temp[i] = att_means[i]
+                if i == len(temp)-1:
+                    temp[i] = '?'
+                else:
+                    temp[i] = att_means[i]
 
             elif attributes[i]['is_nominal']:
                 temp[i] = int(temp[i])
@@ -156,8 +159,11 @@ def parse(filename, keep_unlabeled):
 
     return array, attributes
 
-data = parse("../data/test_btrain.csv", True)[0]
+#data = parse("../data/test_btrain.csv", True)[0]
 
-attributes = parse("../data/test_btrain.csv", True)[1]
+#attributes = parse("../data/test_btrain.csv", True)[1]
 
+#print data
+
+#data = parse("../data/test_btest.csv", True)[0]
 #print data

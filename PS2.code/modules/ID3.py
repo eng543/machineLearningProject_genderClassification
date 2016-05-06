@@ -283,7 +283,14 @@ def gain_ratio_numeric(data_set, attribute, steps):
             step_indices.append(k)
             k += steps
     else:
-        print("boohoo we failed")
+        steps = int(len(data_set)/10)
+        if steps < 1:
+            steps = 1
+
+        while k < len(data_set):
+            step_indices.append(k)
+            k += steps
+
     ratios = {}
 
     for step in step_indices:
@@ -384,7 +391,7 @@ def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
     ========================================================================================================
     Job:    Find the attribute that maximizes the gain ratio. If attribute is numeric return best split value.
             If nominal, then split value is False.
-            If gain ratio of all the attributes is 0, then return False, False
+            If gain ratio of all the attributes is 0, then return False, False-
             Only consider numeric splits for which numerical_splits_count is greater than zero
     ========================================================================================================
     Output: best attribute, split value if numeric
@@ -399,7 +406,7 @@ def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
 
         else:
             if numerical_splits_count[i] != 0:
-                gain_ratio = gain_ratio_numeric(data_set, i, 1) #Nathan: May have to change 1 to steps here - need to doublecheck grading method
+                gain_ratio = gain_ratio_numeric(data_set, i, 10) #Nathan: May have to change 1 to steps here - need to doublecheck grading method
                 if gain_ratio != 0:
                     ratios[(i, gain_ratio[1])] = gain_ratio[0]
                 else:
@@ -458,20 +465,23 @@ def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
     root = Node()
     #print 'depth =', depth
     
-    if depth == 0: #Depth check
-        root.label = mode(data_set)
-    else:
-        root.label = check_homogenous(data_set)
+    #if depth == 0: #Depth check
+    #    root.label = mode(data_set)
+    #else:
+    #    root.label = check_homogenous(data_set)
+
+    root.label = mode(data_set)
+    homogeneous = check_homogenous(data_set)
 
     #print 'label=', root.label
-    if root.label != None: #If data set isn't homogeneous or max depth
+    if homogeneous != None or depth == 0: #If data set isn't homogeneous or max depth
         return root # Finished with this branch
     else:
         best_att = pick_best_attribute(data_set, attribute_metadata, numerical_splits_count)
         #print 'best_att=', best_att
         #print 'data_set=', data_set
         if best_att == (False, False): #Nathan: Exception here since (False, False) can be interpreted as (0, False) and ID3 tries to split on the class
-            root.label = mode(data_set)
+            #root.label = mode(data_set)
             #print 'False, False -> label=', root.label
             return root
         else:
@@ -495,6 +505,7 @@ def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
                 sub_depth = depth - 1
                 for i in data.keys():
                     new_node = ID3(data[i], attribute_metadata, child_numerical_splits_count, sub_depth)
+                    #print sub_depth
                     #print new_node, 'nom'
                     #print [new_node.classify(x) == x[0] for x in data_set]
                     root.children[i] = new_node
@@ -507,6 +518,7 @@ def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
                 sub_depth = depth - 1
                 for i in range(len(data)):
                     new_node = ID3(data[i], attribute_metadata, child_numerical_splits_count, sub_depth)
+                    #print sub_depth
                     #print new_node, 'num'
                     root.children.append(new_node)
 

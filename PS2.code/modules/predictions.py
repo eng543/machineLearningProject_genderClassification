@@ -1,6 +1,8 @@
 import os.path
 from operator import xor
 from parse import *
+from node import *
+import csv
 
 # DOCUMENTATION
 # ========================================
@@ -15,4 +17,12 @@ def create_predictions(tree, predict):
     Given a tree and a url to a data_set. Create a csv with a prediction for each result
     using the classify method in node class.
     '''
-    #### use classify method to make predictions from an unlabeled test set
+    data_set = parse(predict, True)[0]
+
+    # classify each instance in test set
+    # save classification output to csv file
+    with open('data/btest_prediction.csv', 'wb') as csvfile:
+        output = csv.writer(csvfile, delimiter = ',')
+
+        for i in range(len(data_set)):
+            output.writerow(str(tree.classify(data_set[i])))

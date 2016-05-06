@@ -19,6 +19,7 @@
 # splitting_value - if numeric, where to split
 #
 # name - name of the attribute being split on
+import copy
 
 class Node:
     def __init__(self):
@@ -40,18 +41,22 @@ class Node:
         '''
 
         current_label = self.label
+        current_children = self.children
 
-        if current_label == 1 or current_label == 0:
+        if current_children == None:
             return current_label
+
+        #if current_label == 1 or current_label == 0:
+        #    return current_label
 
         else:
             node_index = self.decision_attribute
             att_value = instance[node_index]
-            current_children = self.children
             split_value = self.splitting_value
             nominal = self.is_nominal
 
-            while current_label == None:
+            while current_children != None:
+            #while current_label == None:
                 if nominal == False:
                     split_on = split_value
 
@@ -62,21 +67,27 @@ class Node:
                         next_node = current_children[1]
 
                 else:
-                    next_node = current_children[att_value]
+                    if att_value in current_children:
+                        next_node = current_children[att_value]
+                    ### else: return mode of examples classified at this node
+                    else:
+                        return current_label
 
-                current_label = next_node.label
+                current_children = next_node.children
 
-                if current_label != None:
+                if current_children == None: #current_label != None:
+                    current_label = next_node.label
                     return current_label
 
                 else:
+                    #print current_children
                     node_index = next_node.decision_attribute
                     att_value = instance[node_index]
                     current_children = next_node.children
                     nominal = next_node.is_nominal
                     split_value = next_node.splitting_value
 
-            return next_node
+            #return next_node
         
     #for i in data.keys():
     #    root.children.add[i] = child_node
@@ -103,7 +114,7 @@ class Node:
         '''
         storage ={0: [], 1: []}
         paths = []
-        output = 'IF '
+        output = 'IF \n'
         winners = self.get_leaves(self, storage, paths)
         
         for i in range(len(winners[1])):
@@ -114,10 +125,10 @@ class Node:
                 else:
                     output = output + str(winners[1][i][j][0]) + ' ' + str(winners[1][i][j][2]) + ' ' + str(winners[1][i][j][1]) + ' '
                 if j != len(winners[1][i])-1:
-                    output = output + 'AND '
+                    output = output + '^ '
             output = output + ') '
             if i !=len(winners[1])-1:
-                output = output + 'OR '
+                output = output + 'v \n'
         return output
         
         
@@ -132,12 +143,13 @@ class Node:
         
         node_index = root.name
         split_value = root.splitting_value
+        attribute_index = root.decision_attribute
 
-        if current_label == 1 or current_label == 0:
+        if current_children == None:
+        #if current_label == 1 or current_label == 0:
             storage[current_label].append(path)
             
         else:
-
             current_children = root.children
             split_value = root.splitting_value
             nominal = root.is_nominal
@@ -145,20 +157,19 @@ class Node:
             if nominal == True:
                 for key in current_children.keys():
                     sub_path = copy.copy(path)
-                    sub_path.append([node_index, -1, key])
+                    sub_path.append([node_index, -1, key, attribute_index])
                     cur = current_children[key]
                     self.get_leaves(cur, storage, sub_path)
-            
-            
+
             else:
                 for i in range(len(current_children)):
                     cur = current_children[i]
                     if i == 0:
                         sub_path = copy.copy(path)
-                        sub_path.append([node_index, split_value, '<'])
+                        sub_path.append([node_index, split_value, '<', attribute_index])
                     elif i == 1:
                         sub_path = copy.copy(path)
-                        sub_path.append([node_index, split_value, '>='])
+                        sub_path.append([node_index, split_value, '>=', attribute_index])
                     else:
                         print 'wut'
                     self.get_leaves(cur, storage, sub_path)

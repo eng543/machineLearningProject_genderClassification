@@ -13,8 +13,12 @@ from pruning import validation_accuracy
 def get_graph_accuracy_partial(train_set, attribute_metadata, validate_set, numerical_splits_count, pct):
     '''
     get_graph_accuracy_partial - Given a training set, attribute metadata, validation set, numerical splits count, and percentage,
-    this function will return the validation accuracy of a specified (percentage) portion of the trainging setself.
+    this function will return the validation accuracy of a specified (percentage) portion of the training setself.
     '''
+    # single accuracy for whatver percentage you've chosen
+    # call validation_accuracy from pruning.py
+
+
     pass
 
 def get_graph_data(train_set, attribute_metadata, validate_set, numerical_splits_count, iterations, pcts):
@@ -22,6 +26,14 @@ def get_graph_data(train_set, attribute_metadata, validate_set, numerical_splits
     Given a training set, attribute metadata, validation set, numerical splits count, iterations, and percentages,
     this function will return an array of the averaged graph accuracy partials based off the number of iterations.
     '''
+    # iterations = 20
+    # for each subset of data (at each %point), run 20 times, average results
+    #
+    data_size = len(train_set)/pcts
+    for i in iterations:
+        data_set = train_set[0+i*data_size:data_size+i*data_size]
+
+
     pass
 
 # get_graph will plot the points of the results from get_graph_data and return a graph
