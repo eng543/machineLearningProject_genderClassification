@@ -18,7 +18,7 @@ options = {
     'limit_depth': 20,
     'print_tree': False,
     'print_dnf' : True,
-    'prune' : False, #'data/bvalidate.csv',
+    'prune' : 'data/test_bvalidate.csv',
     'learning_curve' : {
         'upper_bound' : 0.05,
         'increment' : 0.001
@@ -50,7 +50,7 @@ def decision_tree_driver(train, validate = False, predict = False, prune = False
     if prune != False:
         print '###\n#  Pruning\n###'
         pruning_set, _ = parse(prune, False)
-        reduced_error_pruning(tree,train_set,pruning_set)
+        reduced_error_pruning(tree,pruning_set)
         print ''
 
     # print tree visually

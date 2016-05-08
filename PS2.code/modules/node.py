@@ -31,6 +31,7 @@ class Node:
         self.splitting_value = None
         self.children = None #Nathan - checkign
         self.name = None
+        self.prune_diff = None
 
     def __repr__(self):
         return repr(self.label)
@@ -54,20 +55,30 @@ class Node:
             att_value = instance[node_index]
             split_value = self.splitting_value
             nominal = self.is_nominal
+            next_node = self
 
             while current_children != None:
             #while current_label == None:
+
+                #if current_example_count == None:
+                #    current_example_count = 1
+                #else:
+                #    current_example_count += 1
+
                 if nominal == False:
                     split_on = split_value
 
                     if att_value < split_on:
+                        current_children[0].parent = next_node
                         next_node = current_children[0]
 
                     else:
+                        current_children[1].parent = next_node
                         next_node = current_children[1]
 
                 else:
                     if att_value in current_children:
+                        current_children[att_value].parent =  next_node
                         next_node = current_children[att_value]
                     ### else: return mode of examples classified at this node
                     else:
@@ -83,9 +94,9 @@ class Node:
                     #print current_children
                     node_index = next_node.decision_attribute
                     att_value = instance[node_index]
-                    current_children = next_node.children
                     nominal = next_node.is_nominal
                     split_value = next_node.splitting_value
+                    #current_example_count = next_node.num_examples
 
             #return next_node
         
@@ -116,7 +127,8 @@ class Node:
         paths = []
         output = 'IF \n'
         winners = self.get_leaves(self, storage, paths)
-        
+#        print winners
+
         for i in range(len(winners[1])):
             output = output + '( '
             for j in range(len(winners[1][i])):
@@ -159,11 +171,13 @@ class Node:
                     sub_path = copy.copy(path)
                     sub_path.append([node_index, -1, key, attribute_index])
                     cur = current_children[key]
+                    #print cur.children
                     self.get_leaves(cur, storage, sub_path)
 
             else:
                 for i in range(len(current_children)):
                     cur = current_children[i]
+                    #print cur.children
                     if i == 0:
                         sub_path = copy.copy(path)
                         sub_path.append([node_index, split_value, '<', attribute_index])
