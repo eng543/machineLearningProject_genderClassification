@@ -3,6 +3,7 @@ from operator import xor
 from parse import *
 from node import *
 import csv
+import pandas as pd
 
 # DOCUMENTATION
 # ========================================
@@ -21,8 +22,14 @@ def create_predictions(tree, predict):
 
     # classify each instance in test set
     # save classification output to csv file
-    with open('data/btest_prediction.csv', 'wb') as csvfile:
-        output = csv.writer(csvfile, delimiter = ',')
+    test_data = pd.read_csv('data/btest.csv', sep=',')
+    test_data.drop(' winner', inplace=True, axis=1)
 
-        for i in range(len(data_set)):
-            output.writerow(str(tree.classify(data_set[i])))
+    output = []
+
+    for i in range(len(data_set)):
+        output.append(str(tree.classify(data_set[i])))
+
+    test_data['predictions'] = output
+
+    test_data.to_csv('data/PS2.csv', index=False)
