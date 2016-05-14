@@ -105,10 +105,13 @@ def get_data(kid, page_num):
          #d = t.get_user_timeline(screen_name=kid, count="200", page=page, include_entities="true", include_rts="0")  #NEW LINE
             print len(d),
             return d
-    except TweepError:
+    except twython.TwythonRateLimitError:
         print ('Naptime -- last query: ' + kid)
         time.sleep(15*60)
 
+    except TweepError:
+        if TweepError is "Twitter error response: status code = 401":
+            pass    
 
 #def limit_handled(cursor):
 #    while True:
@@ -200,7 +203,7 @@ def write_data(self, d, screen_name, user_type):
                 print "Not inserting, dupe.."
 class Scrape:
     def __init__(self):    
-        engine = sqlalchemy.create_engine("sqlite:///tweets_from_corpus.db", echo=False)  # different DB name here
+        engine = sqlalchemy.create_engine("sqlite:///tweets_from_corpus3.db", echo=False)  # different DB name here
         Session = sessionmaker(bind=engine)
         self.session = Session()  
         Base.metadata.create_all(engine)
